@@ -5,22 +5,30 @@
     <form action="">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">邮箱地址</label>
-        <validate-input :rules="emailRules"></validate-input>
+        <validate-input
+          :rules="emailRules"
+          v-model="emailValue"
+          placeholder="请输入邮箱地址"
+          type="text"
+        >
+        </validate-input>
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">密码</label>
-        <input
+        <validate-input
+          v-model="passwordValue"
+          :rules="passwordRules"
+          placeholder="请输入密码"
           type="password"
-          class="form-control"
-          id="exampleInputPassword1"
-        />
+        >
+        </validate-input>
       </div>
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ColumnList, { ColumnProps } from "./components/ColumnList.vue";
 import GlobalHeader, { UserProps } from "./components/GlobalHeader.vue";
@@ -73,11 +81,15 @@ export default defineComponent({
         message: "请输入正确的电子邮箱格式",
       },
     ];
-
+    const emailValue = ref("lx");
+    const passwordValue = ref("");
     return {
       testData,
       currentUser,
       emailRules,
+      emailValue,
+      // passwordRules,
+      passwordValue,
     };
   },
 });
