@@ -2,7 +2,7 @@
   <div class="container">
     <global-header :user="currentUser"></global-header>
     <!-- <column-list :list="testData"></column-list> -->
-    <form action="">
+    <validate-form @form-submit="onFormSubmit">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">邮箱地址</label>
         <validate-input
@@ -23,7 +23,10 @@
         >
         </validate-input>
       </div>
-    </form>
+      <template #submit>
+        <span class="btn btn-danger">提交</span>
+      </template>
+    </validate-form>
   </div>
 </template>
 
@@ -33,6 +36,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ColumnList, { ColumnProps } from "./components/ColumnList.vue";
 import GlobalHeader, { UserProps } from "./components/GlobalHeader.vue";
 import ValidateInput, { RulesProp } from "./components/ValidateInput.vue";
+import ValidateForm from "./components/ValidateForm.vue";
 const testData: ColumnProps[] = [
   {
     id: 1,
@@ -69,7 +73,7 @@ const currentUser: UserProps = {
 };
 export default defineComponent({
   name: "App",
-  components: { ColumnList, GlobalHeader, ValidateInput },
+  components: { ColumnList, GlobalHeader, ValidateInput, ValidateForm },
   setup() {
     const emailRules: RulesProp = [
       {
@@ -81,15 +85,25 @@ export default defineComponent({
         message: "请输入正确的电子邮箱格式",
       },
     ];
-    const emailValue = ref("lx");
+    const passwordRules: RulesProp = [
+      {
+        type: "required",
+        message: "密码不能为空",
+      },
+    ];
+    const emailValue = ref("");
     const passwordValue = ref("");
+    const onFormSubmit = (result: boolean) => {
+      console.log(result);
+    };
     return {
       testData,
       currentUser,
       emailRules,
       emailValue,
-      // passwordRules,
+      passwordRules,
       passwordValue,
+      onFormSubmit,
     };
   },
 });

@@ -15,7 +15,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive } from "vue";
+import { defineComponent, onMounted, PropType, reactive } from "vue";
+import { emitter } from "./ValidateForm.vue";
 interface RuleProp {
   type: "required" | "email";
   message: string;
@@ -55,7 +56,9 @@ export default defineComponent({
           return passed;
         });
         inputRef.error = !allPassed;
+        return allPassed;
       }
+      return true;
     };
     const updateValue = (e: KeyboardEvent) => {
       const targetValue = (e.target as HTMLInputElement).value;
@@ -63,6 +66,9 @@ export default defineComponent({
       //触发v-model事件
       context.emit("update:modelValue", targetValue);
     };
+    onMounted(() => {
+      emitter.emit("form-item-created", validateInput);
+    });
     return {
       inputRef,
       validateInput,
