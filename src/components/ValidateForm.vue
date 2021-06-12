@@ -23,7 +23,6 @@ export default defineComponent({
       const resultArr = funcArr.map((func) => {
         func();
       });
-      console.log(resultArr);
       const result = resultArr.every((item) => {
         item;
       });
