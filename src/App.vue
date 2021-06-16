@@ -2,6 +2,7 @@
   <div class="container">
     <global-header :user="currentUser"></global-header>
     <!-- <column-list :list="testData"></column-list> -->
+    <router-view></router-view>
     <validate-form @form-submit="onFormSubmit">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">邮箱地址</label>
@@ -68,7 +69,7 @@ const testData: ColumnProps[] = [
   },
 ];
 const currentUser: UserProps = {
-  isLogin: true,
+  isLogin: false,
   name: "lx",
 };
 export default defineComponent({
