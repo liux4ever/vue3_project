@@ -32,21 +32,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ColumnList, { ColumnProps } from "./components/ColumnList.vue";
 import GlobalHeader, { UserProps } from "./components/GlobalHeader.vue";
 import ValidateInput, { RulesProp } from "./components/ValidateInput.vue";
 import ValidateForm from "./components/ValidateForm.vue";
+import { useStore } from "vuex";
 
-const currentUser: UserProps = {
-  isLogin: false,
-  name: "lx",
-};
 export default defineComponent({
   name: "App",
   components: { ColumnList, GlobalHeader, ValidateInput, ValidateForm },
   setup() {
+    const store = useStore();
+    const currentUser = computed(() => store.state.user);
     const emailRules: RulesProp = [
       {
         type: "required",

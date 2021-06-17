@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import ColumnDetail from './views/ColumnDetail.vue'
+import store from './store'
 import App from './App.vue'
 
 const routerHistory = createWebHashHistory();
@@ -27,4 +28,4 @@ const router = createRouter({
     ]
 })
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).use(store).mount('#app')
