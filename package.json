@@ -10,7 +10,8 @@
     "bootstrap": "^5.0.0-beta3",
     "mitt": "^2.1.0",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.9"
+    "vue-router": "^4.0.9",
+    "vuex": "^4.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-typescript": "~4.5.0",
