@@ -20,19 +20,21 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script lang="ts">
+import { computed, defineComponent } from "vue";
 import { useRoute } from "vue-router";
-import { testData, testPosts } from "../testData";
+import { GlobalDataProps } from "../store";
 import PostList from "../components/PostList.vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   components: { PostList },
   setup() {
     const route = useRoute();
     const currentId = route.params.id;
-    const column = testData.find((item) => item.id == currentId);
-    const list = testPosts.filter((post) => post.columnId == currentId);
+    const store = useStore<GlobalDataProps>();
+    const column = computed(() => store.getters.getColumnById(currentId));
+    const list = computed(() => store.getters.getPostsByCid(currentId));
     return { column, list };
   },
 });
