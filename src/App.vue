@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <global-header :user="currentUser"></global-header>
-    <!-- <column-list :list="testData"></column-list> -->
     <router-view></router-view>
     <footer class="text-center py-4 text-secondary bg-light mt-6">
       <small>
@@ -16,13 +15,12 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ColumnList from "./components/ColumnList.vue";
 import GlobalHeader from "./components/GlobalHeader.vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
   name: "App",
-  components: { ColumnList, GlobalHeader },
+  components: { GlobalHeader },
   setup() {
     const store = useStore();
     const currentUser = computed(() => store.state.user);

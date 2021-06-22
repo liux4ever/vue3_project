@@ -18,8 +18,9 @@
 import { defineComponent, onMounted, PropType, reactive } from "vue";
 import { emitter } from "./ValidateForm.vue";
 interface RuleProp {
-  type: "required" | "email";
+  type: "required" | "email" | "custom";
   message: string;
+  validator?: () => boolean;
 }
 export type RulesProp = RuleProp[];
 export default defineComponent({
@@ -36,8 +37,7 @@ export default defineComponent({
       error: false,
       message: "",
     });
-    const emailReg =
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const emailReg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const validateInput = () => {
       if (props.rules) {
         const allPassed = props.rules.every((rule) => {

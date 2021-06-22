@@ -64,6 +64,8 @@ export default defineComponent({
       console.log(result);
     };
     return {
+      emailRules,
+      passwordRules,
       emailValue,
       passwordValue,
       onFormSubmit,

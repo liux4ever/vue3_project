@@ -33,12 +33,13 @@ export default defineComponent({
     const route = useRoute();
     const currentId = route.params.id;
     const store = useStore<GlobalDataProps>();
-    const column = computed(() => store.getters.getColumnById(currentId));
-    const list = computed(() => store.getters.getPostsByCid(currentId));
+    const column = computed(() => {
+      store.getters.getColumnById(currentId);
+    });
+    const list = computed(() => store.state.columns);
     return { column, list };
   },
 });
 </script>
 
-<style>
-</style>
+<style></style>
