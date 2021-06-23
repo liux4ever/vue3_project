@@ -36,7 +36,10 @@ export default defineComponent({
     const column = computed(() => {
       store.getters.getColumnById(currentId);
     });
-    const list = computed(() => store.state.columns);
+    const list = computed(() => {
+      const columns = store.getters.getPostsByCid(currentId);
+      return columns;
+    });
     return { column, list };
   },
 });

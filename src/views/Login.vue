@@ -61,7 +61,9 @@ export default defineComponent({
     const emailValue = ref("");
     const passwordValue = ref("");
     const onFormSubmit = (result: boolean) => {
-      console.log(result);
+      if (result) {
+        router.push("/");
+      }
     };
     return {
       emailRules,
