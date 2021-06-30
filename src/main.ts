@@ -4,7 +4,12 @@ import axios from "axios";
 import router from "./router";
 import App from "./App.vue";
 
-axios.get("http://api.vikingship.xyz/api/columns").then((res) => {
+axios.defaults.baseURL = "http://api.vikingship.xyz/api/";
+axios.interceptors.request.use((config) => {
+  config.params = { ...config.params, icode: "" };
+  return config;
+});
+axios.get("/columns").then((res) => {
   console.log(res);
 });
 
