@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import { testData, testPosts, ColumnProps, PostProps } from "./testData";
+import axios from "axios";
 
 export interface UserProps {
   isLogin: boolean;
@@ -21,6 +22,16 @@ const store = createStore<GlobalDataProps>({
   mutations: {
     login(state) {
       state.user = { ...state.user, isLogin: true, name: "lx" };
+    },
+    fecthColumns(state, rawData) {
+      state.columns = rawData.data.list;
+    },
+  },
+  actions: {
+    fecthColumns(context) {
+      axios.get("./columns").then((res) => {
+        context.commit("fectchColumns", res.data);
+      });
     },
   },
   getters: {
