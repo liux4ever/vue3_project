@@ -4,7 +4,7 @@
       <div class="card h-100 shadow-sm">
         <div class="card-body text-center">
           <img
-            :src="column.avatar"
+            :src="column.avatar && column.avatar.url"
             :alt="column.title"
             class="rounded-circle border border-light w-25 my-3"
           />
@@ -23,18 +23,13 @@
 
 <script lang="ts">
 import { computed, PropType, defineComponent } from "vue";
-export interface ColumnProps {
-  id: number;
-  title: string;
-  avatar?: string;
-  description: string;
-}
+import { ColumnsProps } from "../store";
 export default defineComponent({
   // defineComponent最重要的功能的是 在TS下给予组件 正确的类型判断
   name: "ColumnList",
   props: {
     list: {
-      type: Array as PropType<ColumnProps[]>,
+      type: Array as PropType<ColumnsProps[]>,
       required: true,
     },
   },
@@ -42,11 +37,14 @@ export default defineComponent({
     const columnList = computed(() => {
       return props.list.map((item) => {
         if (!item.avatar) {
-          item.avatar = require("@/assets/logo.png");
+          item.avatar = {
+            url: require("@/assets/logo.png"),
+          };
         }
         return item;
       });
     });
+    console.log(columnList);
     return {
       columnList,
     };
