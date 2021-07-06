@@ -7,17 +7,6 @@ export interface UserProps {
   name?: string;
   id?: number;
 }
-export interface ImageProps {
-  _id?: string
-  url?: string
-  createdAt?: string
-}
-export interface ColumnsProps {
-  _id: string
-  title: string
-  avatar?: ImageProps
-  description: string
-}
 export interface GlobalDataProps {
   columns: ColumnProps[];
   posts: PostProps[];
